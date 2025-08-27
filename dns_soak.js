@@ -1,8 +1,8 @@
 import dns from "k6/x/dns";
 import { check } from "k6";
 
-const smallDuration = "5m";
-const duration = "60m";
+const smallDuration = "30m";
+const duration = "6h";
 
 export const options = {
 	stages: [
