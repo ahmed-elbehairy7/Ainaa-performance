@@ -20,12 +20,10 @@ export const options = {
 	},
 };
 
-const eq = (ip) => (anotherIp) => ip === anotherIp;
-
 const dnsServer = "157.175.116.122:53"; // Replace with your DNS server's IP:port
 const domainTests = {
-	"www.google.com": [eq("216.239.38.120"), "216.239.38.120"],
-	"www.spotify.com": [eq("0.0.0.0"), "0.0.0.0"],
+	"www.google.com": "216.239.38.120",
+	"www.spotify.com": "0.0.0.0",
 };
 export default async function () {
 	let ips;
@@ -37,8 +35,8 @@ export default async function () {
 		//
 	} finally {
 		check(ips, {
-			[`${key} resolved to ${domainTests[key][1]}`]: (r) =>
-				r ? domainTests[key][0](r[0]) : false,
+			[`${key} resolved to ${domainTests[key]}`]: (r) =>
+				r && r[0] === domainTests[key],
 		});
 	}
 }
